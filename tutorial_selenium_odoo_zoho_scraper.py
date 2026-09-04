@@ -232,7 +232,8 @@ def scrape_odoo_zoho_tutorial_pipeline():
     # 4. GOOGLE SHEETS SYNC
     try:
         scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-        creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scopes)
+        from config import SERVICE_ACCOUNT_INFO
+        creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
         gc = gspread.authorize(creds)
 
         # Odoo Sheet

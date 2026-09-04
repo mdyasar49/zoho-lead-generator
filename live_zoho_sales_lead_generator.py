@@ -309,7 +309,8 @@ def main():
     authenticate_zoho_community_session()
 
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-    creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scopes)
+    from config import SERVICE_ACCOUNT_INFO
+    creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
     gc = gspread.authorize(creds)
 
     sheet = gc.open_by_key(SPREADSHEET_ID_ZOHO)
