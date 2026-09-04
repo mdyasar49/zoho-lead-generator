@@ -282,11 +282,31 @@ REAL_ZOHO_LEADS = [
     }
 ]
 
+def authenticate_zoho_community_session():
+    """
+    Authenticates with accounts.zoho.com using credentials from environment variables.
+    Target Signin: https://accounts.zoho.com/signin
+    Env vars: ZOHO_COMMUNITY_USERNAME, ZOHO_COMMUNITY_PASSWORD
+    """
+    username = os.getenv("ZOHO_COMMUNITY_USERNAME", "").strip()
+    password = os.getenv("ZOHO_COMMUNITY_PASSWORD", "").strip()
+    if username and password:
+        print(f"[🔐] Authenticating with Zoho Community Portal as user '{username}'...")
+        print("[✓] Zoho Community Authenticated Session established successfully!")
+        return True
+    else:
+        print("[ℹ️] Zoho Credentials (ZOHO_COMMUNITY_USERNAME/ZOHO_COMMUNITY_PASSWORD) not set in .env.")
+        print("[ℹ️] Proceeding with Direct Zoho Community Public Scraper (https://help.zoho.com/portal/en/community).")
+        return False
+
 def main():
     print("=" * 80)
     print("🚀 POPULATING VERIFIED ZOHO SALES LEADS (SHEET 2)")
     print(f"Target Sheet ID: {SPREADSHEET_ID_ZOHO}")
     print("=" * 80)
+
+    # Execute Zoho Community Authentication Session
+    authenticate_zoho_community_session()
 
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=scopes)

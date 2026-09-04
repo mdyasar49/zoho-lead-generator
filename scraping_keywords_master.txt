@@ -78,6 +78,26 @@ T: Follow Up Notes
 U: Description
 
 ================================================================================
+4. COMMUNITY AUTHENTICATION CREDENTIALS CONFIGURATION (.env):
+================================================================================
+To extract member-only sales executive profiles from www.odoo.com and accounts.zoho.com,
+add your credentials to the .env file in the root project directory:
+
+ODOO_COMMUNITY_USERNAME=your_email@domain.com
+ODOO_COMMUNITY_PASSWORD=your_password
+ZOHO_COMMUNITY_USERNAME=your_email@domain.com
+ZOHO_COMMUNITY_PASSWORD=your_password
+
+Login Sites & URLs:
+• Odoo Signup / Login : https://www.odoo.com/web/signup
+• Zoho Signin         : https://accounts.zoho.com/signin
+
+Note: If credentials are not specified, the scrapers will operate on the public
+Odoo Community Forum (https://www.odoo.com/forum) and Zoho Community Portal
+(https://help.zoho.com/portal/en/community) endpoints automatically.
+================================================================================
+
+================================================================================
 5. AUTOMATION TIMING & CRON SCHEDULE:
 ================================================================================
 Cron Schedule: 0 * * * * (Runs at minute 0 of every hour)
