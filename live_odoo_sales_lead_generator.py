@@ -37,6 +37,8 @@ def scrape_live_odoo_sales_leads():
     target_urls = [
         "https://www.odoo.com/contactus",
         "https://www.odoo.com/my",
+        "https://www.odoo.com/page/about-us",
+        "https://www.odoo.com/jobs",
         "https://www.odoo.com/app/crm"
     ]
     
