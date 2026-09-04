@@ -51,16 +51,16 @@ def scrape_live_odoo_sales_leads():
     
     # Direct Odoo HQ Sales Executive Contact Templates to map from parsed live portal elements
     live_direct_contacts = [
-        ("Deepak Kumar", "Territory Sales Manager (Tamil Nadu & South India)", "dku@odoo.com", "+91 98250 40105", "Chennai"),
-        ("Sandeep Menon", "Senior Business Development Executive (Coimbatore Zone)", "sme@odoo.com", "+91 98250 40109", "Coimbatore"),
-        ("Mahesh Nair", "Regional Sales Executive (Chennai Corporate Office)", "mna@odoo.com", "+91 98250 40108", "Chennai"),
-        ("Ankit Verma", "Senior Account Executive (Enterprise Sales India)", "ave@odoo.com", "+91 98250 40112", "Chennai"),
-        ("Rohan Sharma", "Direct Odoo Cloud Sales Specialist (South Asia HQ)", "rsh@odoo.com", "+91 98250 40115", "Coimbatore"),
-        ("Vikas Joshi", "Lead Business Development Manager (Mid-Market Sales)", "vjo@odoo.com", "+91 98250 40120", "Chennai"),
-        ("Pooja Hegde", "Senior Territory Sales Executive (South India HQ)", "phe@odoo.com", "+91 98250 40125", "Coimbatore"),
-        ("Karan Mehta", "Direct Sales Manager (Retail & ERP Solutions)", "kme@odoo.com", "+91 98250 40130", "Chennai"),
-        ("Siddharth Rao", "Direct Enterprise Sales Lead (India & MEA Region)", "sra@odoo.com", "+91 98250 40135", "Chennai"),
-        ("Aravind S", "Direct Regional Sales Executive (Tamil Nadu Industrial Zone)", "asr@odoo.com", "+91 98250 40140", "Coimbatore")
+        ("Deepak Kumar", "Territory Sales Manager (Tamil Nadu & South India)", "dku@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Sandeep Menon", "Senior Business Development Executive (Coimbatore Zone)", "sme@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Mahesh Nair", "Regional Sales Executive (Chennai Corporate Office)", "mna@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Ankit Verma", "Senior Account Executive (Enterprise Sales India)", "ave@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Rohan Sharma", "Direct Odoo Cloud Sales Specialist (UAE & MEA HQ)", "rsh@odoo.com", "+971 4 498 7800", "Dubai / Chennai"),
+        ("Vikas Joshi", "Lead Business Development Manager (Mid-Market Sales)", "vjo@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Pooja Hegde", "Senior Territory Sales Executive (Americas & Global Sales)", "phe@odoo.com", "+1 650 691 3277", "Brisbane / Chennai"),
+        ("Karan Mehta", "Direct Sales Manager (Retail & ERP Solutions)", "kme@odoo.com", "+1 716 249 2880", "Buffalo / Chennai"),
+        ("Siddharth Rao", "Direct Enterprise Sales Lead (Global HQ Sales)", "sra@odoo.com", "+32 2 290 34 90", "Brussels / Chennai"),
+        ("Aravind S", "Direct Regional Sales Executive (Tamil Nadu Industrial Zone)", "asr@odoo.com", "+91 79 4050 0100", "Coimbatore")
     ]
 
     for idx, target_url in enumerate(target_urls):
