@@ -299,6 +299,17 @@ def authenticate_zoho_community_session():
         print("[ℹ️] Proceeding with Direct Zoho Community Public Scraper (https://help.zoho.com/portal/en/community).")
         return False
 
+def open_sheet_with_retry(gc, spreadsheet_id, retries=5, delay=3):
+    for attempt in range(1, retries + 1):
+        try:
+            return gc.open_by_key(spreadsheet_id)
+        except Exception as e:
+            if attempt == retries:
+                raise e
+            print(f"[⚠️] Google Sheets API transient note ({e}). Retrying ({attempt}/{retries}) in {delay}s...")
+            time.sleep(delay)
+            delay *= 2
+
 def main():
     print("=" * 80)
     print("🚀 POPULATING VERIFIED ZOHO SALES LEADS (SHEET 2)")
@@ -313,7 +324,7 @@ def main():
     creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
     gc = gspread.authorize(creds)
 
-    sheet = gc.open_by_key(SPREADSHEET_ID_ZOHO)
+    sheet = open_sheet_with_retry(gc, SPREADSHEET_ID_ZOHO)
     wks = sheet.sheet1
 
     wks.clear()

@@ -299,6 +299,17 @@ def authenticate_odoo_community_session():
         print("[ℹ️] Proceeding with Direct Odoo Community Public Scraper (https://www.odoo.com/forum).")
         return False
 
+def open_sheet_with_retry(gc, spreadsheet_id, retries=5, delay=3):
+    for attempt in range(1, retries + 1):
+        try:
+            return gc.open_by_key(spreadsheet_id)
+        except Exception as e:
+            if attempt == retries:
+                raise e
+            print(f"[⚠️] Google Sheets API transient note ({e}). Retrying ({attempt}/{retries}) in {delay}s...")
+            time.sleep(delay)
+            delay *= 2
+
 def main():
     print("=" * 80)
     print("🚀 POPULATING VERIFIED ODOO SALES LEADS (SHEET 1)")
@@ -313,7 +324,7 @@ def main():
     creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=scopes)
     gc = gspread.authorize(creds)
 
-    sheet = gc.open_by_key(SPREADSHEET_ID_ODOO)
+    sheet = open_sheet_with_retry(gc, SPREADSHEET_ID_ODOO)
     wks = sheet.sheet1
 
     wks.clear()
