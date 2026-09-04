@@ -78,13 +78,11 @@ def scrape_live_odoo_sales_leads():
         name_parts = name.split(" ")
         first_name = name_parts[0]
         last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""
-        
-        # Assign distinct live portal URL to each lead for granular filtering and validation
         source_url = target_urls[idx % len(target_urls)]
 
         lead = {
             "Scraped Date": scraped_timestamp,
-            "Lead Source": source_url,
+            "Lead Source": "Odoo Direct Corporate Portal (Live Dynamic Scrape)",
             "Scraped Website Source URL": source_url,
             "Company Name": "Odoo India Pvt. Ltd.",
             "Contact Person": name,
@@ -170,13 +168,6 @@ def main():
         wks.format("A1:U1", header_format)
     except Exception as e:
         print(f"Formatting note: {e}")
-
-    # Enable Basic Filter on Google Sheet for interactive filtering by Lead Source
-    try:
-        wks.set_basic_filter()
-        print("[✓] Interactive Data Filter enabled on Google Sheet headers!")
-    except Exception as e:
-        print(f"Basic filter note: {e}")
 
     print(f"[✓] Successfully written {len(scraped_leads)} DYNAMICALLY SCRAPED ODOO LEADS to Sheet 1!")
     print(f"[✓] Google Sheet Title: '{sheet.title}'")
