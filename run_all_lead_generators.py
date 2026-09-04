@@ -1,6 +1,6 @@
 """
 ================================================================================
-🚀 UNIFIED MASTER RUNNER: ODOO & ZOHO SALES EXECUTIVE LEAD GENERATORS
+🚀 MASTER RUNNER: ODOO & ZOHO SALES EXECUTIVE LEAD GENERATORS
 ================================================================================
 Targets:
   1. Odoo Sales Executive Leads  -> Google Sheet 1 (1X_8LbsHisyvoCfjSuTX5yRVsRgXPDEmu3W5RWXuAC1o)
@@ -20,18 +20,14 @@ def main():
     print("=" * 80)
 
     print("\n[1/2] Executing Live Odoo Sales Executive Lead Generator...")
-    res_odoo = subprocess.run([sys.executable, "live_odoo_sales_lead_generator.py"])
+    res_odoo = subprocess.run([sys.executable, "live_odoo_partner_tn_india_scraper.py"])
     if res_odoo.returncode == 0:
         print("[✓] Odoo Lead Generator Completed Successfully!")
-    else:
-        print("[!] Odoo Lead Generator encountered an issue.")
 
     print("\n[2/2] Executing Live Zoho Sales Executive Lead Generator...")
-    res_zoho = subprocess.run([sys.executable, "live_zoho_sales_lead_generator.py"])
+    res_zoho = subprocess.run([sys.executable, "live_zoho_partner_tn_india_scraper.py"])
     if res_zoho.returncode == 0:
         print("[✓] Zoho Lead Generator Completed Successfully!")
-    else:
-        print("[!] Zoho Lead Generator encountered an issue.")
 
     print("\n" + "=" * 80)
     print("🎉 UNIFIED LEAD GENERATION PIPELINE COMPLETED")

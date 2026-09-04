@@ -1,12 +1,12 @@
-name: Hourly Odoo & Zoho Sales Lead Generator Automation
+name: Hourly Odoo & Zoho Sales Executive Lead Generator
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs at the top of every hour
+    - cron: '0 * * * *' # Runs every 1 hour
   workflow_dispatch:
 
 jobs:
-  run-lead-generators:
+  run-lead-generator:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "${{ secrets.GCP_SA_KEY }}" > sheet-sync-504707-85df40232946.json
 
-      - name: Run Unified Lead Generator Pipeline
+      - name: Execute Odoo & Zoho Lead Generators
         run: |
           python run_all_lead_generators.py
 

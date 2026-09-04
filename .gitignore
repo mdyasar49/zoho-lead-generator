@@ -1,13 +1,4 @@
-# Ignore secret credential files
+
 *.json
-sheet-sync-*.json
 
-# Byte-compiled / Python cache
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Environments
-.venv
-env/
-venv/
+*.json
