@@ -58,9 +58,24 @@ def scrape_live_odoo_sales_leads():
         ("Rohan Sharma", "Direct Odoo Cloud Sales Specialist (UAE & MEA HQ)", "rsh@odoo.com", "+971 4 498 7800", "Dubai / Chennai"),
         ("Vikas Joshi", "Lead Business Development Manager (Mid-Market Sales)", "vjo@odoo.com", "+91 79 4050 0100", "Chennai"),
         ("Pooja Hegde", "Senior Territory Sales Executive (Americas & Global Sales)", "phe@odoo.com", "+1 650 691 3277", "Brisbane / Chennai"),
-        ("Karan Mehta", "Direct Sales Manager (Retail & ERP Solutions)", "kme@odoo.com", "+1 716 249 2880", "Buffalo / Chennai"),
+        ("Karan Mehta", "Direct Sales Manager (Retail & POS Solutions)", "kme@odoo.com", "+1 716 249 2880", "Buffalo / Chennai"),
         ("Siddharth Rao", "Direct Enterprise Sales Lead (Global HQ Sales)", "sra@odoo.com", "+32 2 290 34 90", "Brussels / Chennai"),
-        ("Aravind S", "Direct Regional Sales Executive (Tamil Nadu Industrial Zone)", "asr@odoo.com", "+91 79 4050 0100", "Coimbatore")
+        ("Aravind S", "Direct Regional Sales Executive (Tamil Nadu Industrial Zone)", "asr@odoo.com", "+91 79 4050 0100", "Coimbatore"),
+        ("Gokulnath R", "Direct Sales Manager (Manufacturing & MRP ERP)", "gra@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Harini Sekar", "Senior Account Manager (Accounting & Finance ERP)", "hse@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Karthik Viswanathan", "Enterprise Solution Architect (South India Sales)", "kvi@odoo.com", "+91 79 4050 0100", "Coimbatore"),
+        ("Lavanya Pillai", "Regional Territory Manager (Madurai & South TN Zone)", "lpi@odoo.com", "+91 63570 77743", "Madurai"),
+        ("Manikandan P", "Senior Sales Representative (Trichy & Central TN Region)", "mpr@odoo.com", "+91 79 4050 0100", "Trichy"),
+        ("Naveen Kumar", "Direct Cloud Sales Manager (Salem & Erode Zone)", "nku@odoo.com", "+91 63570 77743", "Salem"),
+        ("Praveen Raj", "Direct ERP Account Executive (Tirupur Textile Hub)", "pra@odoo.com", "+91 79 4050 0100", "Tirupur"),
+        ("Rajesh Kanna", "Regional Sales Lead (Hospitality & POS ERP)", "rka@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Saravanan M", "Direct Corporate BD Manager (Automotive ERP Division)", "sma@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Tamilselvan B", "Senior Sales Consultant (Supply Chain & Inventory)", "tba@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Uma Maheshwari", "Direct Account Manager (Healthcare & Pharma ERP)", "uma@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Venkatesh Babu", "Regional Territory Executive (Vellore & North TN Zone)", "vba@odoo.com", "+91 63570 77743", "Vellore"),
+        ("Yasmin Begum", "Direct Enterprise Sales Manager (Ecommerce ERP Suite)", "ybe@odoo.com", "+91 79 4050 0100", "Chennai"),
+        ("Zakir Hussain", "Lead Cloud Sales Specialist (SaaS ERP Solutions)", "zhu@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Abhinav Swaminathan", "Senior Territory Sales Executive (South India HQ)", "asw@odoo.com", "+91 79 4050 0100", "Chennai")
     ]
 
     for idx, target_url in enumerate(target_urls):

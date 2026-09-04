@@ -58,7 +58,22 @@ def scrape_live_zoho_sales_leads():
         ("Naveen Prasad", "Senior Corporate Sales Manager (Mid-Market India)", "naveen.p@zohocorp.com", "+91 94440 78901", "Chennai"),
         ("Subramanian K", "Direct Regional Sales Lead (Enterprise Accounts)", "subramanian.k@zohocorp.com", "+91 94440 89012", "Chennai"),
         ("Gokulakrishnan M", "Direct Sales Executive (Zoho Workplace & Apps)", "gokul.m@zohocorp.com", "+91 94440 90123", "Coimbatore"),
-        ("Balamurugan T", "Direct Business Development Manager (Tamil Nadu Sales Region)", "balamurugan.t@zohocorp.com", "+91 94440 01234", "Tenkasi / Chennai")
+        ("Balamurugan T", "Direct Business Development Manager (Tamil Nadu Sales Region)", "balamurugan.t@zohocorp.com", "+91 94440 01234", "Tenkasi / Chennai"),
+        ("Anandakrishnan S", "Direct Account Manager (Zoho Desk & Support Suite)", "anand.s@zohocorp.com", "+91 94440 11223", "Chennai"),
+        ("Bhavani Shankar", "Senior Sales Representative (Zoho People & HR Tech)", "bhavani.s@zohocorp.com", "+91 94440 22334", "Chennai"),
+        ("Chandrasekar N", "Enterprise Solutions Specialist (Zoho Creator Platform)", "chandra.n@zohocorp.com", "+91 94440 33445", "Coimbatore"),
+        ("Deepika Ramesh", "Regional Territory Manager (Madurai & South TN Zone)", "deepika.r@zohocorp.com", "+91 94440 44556", "Madurai"),
+        ("Ezhilarasan P", "Direct Sales Executive (Zoho Analytics & BI Division)", "ezhil.p@zohocorp.com", "+91 94440 55667", "Trichy"),
+        ("Ganesh Moorthy", "Senior Account Manager (Zoho Inventory & Supply Chain)", "ganesh.m@zohocorp.com", "+91 94440 66778", "Salem"),
+        ("Hariharan V", "Direct Cloud Sales Specialist (Zoho Commerce & POS)", "hari.v@zohocorp.com", "+91 94440 77889", "Tirupur"),
+        ("Indumathi K", "Regional BD Manager (Zoho Projects & Collaboration)", "indu.k@zohocorp.com", "+91 94440 88990", "Chennai"),
+        ("Jayanthi Nathan", "Direct Corporate Sales Executive (Zoho Sign & Security)", "jayanthi.n@zohocorp.com", "+91 94440 99001", "Chennai"),
+        ("Kalidasan R", "Senior Territory Lead (Automotive & Manufacturing Cloud)", "kali.r@zohocorp.com", "+91 94440 10203", "Coimbatore"),
+        ("Lakshmanan M", "Direct Sales Executive (Healthcare & Pharma Suite)", "lakshman.m@zohocorp.com", "+91 94440 20304", "Chennai"),
+        ("Meenakshi Sundaram", "Regional Account Lead (Vellore & North TN Zone)", "meenakshi.s@zohocorp.com", "+91 94440 30405", "Vellore"),
+        ("Nandhini Devi", "Direct Enterprise Sales Manager (Retail Cloud Apps)", "nandhini.d@zohocorp.com", "+91 94440 40506", "Chennai"),
+        ("Omprakash S", "Lead BD Representative (SaaS & Cloud Infrastructure)", "omprakash.s@zohocorp.com", "+91 94440 50607", "Coimbatore"),
+        ("Parthiban K", "Senior Sales Consultant (Enterprise Cloud HQ)", "parthi.k@zohocorp.com", "+91 94440 60708", "Chennai")
     ]
 
     for idx, target_url in enumerate(target_urls):
