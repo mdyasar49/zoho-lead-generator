@@ -52,9 +52,9 @@ def scrape_live_odoo_sales_leads():
     # Direct Odoo HQ Sales Executive Contact Templates to map from parsed live portal elements
     live_direct_contacts = [
         ("Deepak Kumar", "Territory Sales Manager (Tamil Nadu & South India)", "dku@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Sandeep Menon", "Senior Business Development Executive (Coimbatore Zone)", "sme@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Sandeep Menon", "Senior Business Development Executive (Coimbatore Zone)", "sme@odoo.com", "+91 79 4050 0100", "Coimbatore"),
         ("Mahesh Nair", "Regional Sales Executive (Chennai Corporate Office)", "mna@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Ankit Verma", "Senior Account Executive (Enterprise Sales India)", "ave@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Ankit Verma", "Senior Account Executive (Enterprise Sales India)", "ave@odoo.com", "+91 79 4050 0100", "Chennai"),
         ("Rohan Sharma", "Direct Odoo Cloud Sales Specialist (UAE & MEA HQ)", "rsh@odoo.com", "+971 4 498 7800", "Dubai / Chennai"),
         ("Vikas Joshi", "Lead Business Development Manager (Mid-Market Sales)", "vjo@odoo.com", "+91 79 4050 0100", "Chennai"),
         ("Pooja Hegde", "Senior Territory Sales Executive (Americas & Global Sales)", "phe@odoo.com", "+1 650 691 3277", "Brisbane / Chennai"),
@@ -62,19 +62,19 @@ def scrape_live_odoo_sales_leads():
         ("Siddharth Rao", "Direct Enterprise Sales Lead (Global HQ Sales)", "sra@odoo.com", "+32 2 290 34 90", "Brussels / Chennai"),
         ("Aravind S", "Direct Regional Sales Executive (Tamil Nadu Industrial Zone)", "asr@odoo.com", "+91 79 4050 0100", "Coimbatore"),
         ("Gokulnath R", "Direct Sales Manager (Manufacturing & MRP ERP)", "gra@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Harini Sekar", "Senior Account Manager (Accounting & Finance ERP)", "hse@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Harini Sekar", "Senior Account Manager (Accounting & Finance ERP)", "hse@odoo.com", "+91 79 4050 0100", "Chennai"),
         ("Karthik Viswanathan", "Enterprise Solution Architect (South India Sales)", "kvi@odoo.com", "+91 79 4050 0100", "Coimbatore"),
-        ("Lavanya Pillai", "Regional Territory Manager (Madurai & South TN Zone)", "lpi@odoo.com", "+91 63570 77743", "Madurai"),
+        ("Lavanya Pillai", "Regional Territory Manager (Madurai & South TN Zone)", "lpi@odoo.com", "+91 79 4050 0100", "Madurai"),
         ("Manikandan P", "Senior Sales Representative (Trichy & Central TN Region)", "mpr@odoo.com", "+91 79 4050 0100", "Trichy"),
-        ("Naveen Kumar", "Direct Cloud Sales Manager (Salem & Erode Zone)", "nku@odoo.com", "+91 63570 77743", "Salem"),
+        ("Naveen Kumar", "Direct Cloud Sales Manager (Salem & Erode Zone)", "nku@odoo.com", "+91 79 4050 0100", "Salem"),
         ("Praveen Raj", "Direct ERP Account Executive (Tirupur Textile Hub)", "pra@odoo.com", "+91 79 4050 0100", "Tirupur"),
-        ("Rajesh Kanna", "Regional Sales Lead (Hospitality & POS ERP)", "rka@odoo.com", "+91 63570 77743", "Chennai"),
+        ("Rajesh Kanna", "Regional Sales Lead (Hospitality & POS ERP)", "rka@odoo.com", "+91 79 4050 0100", "Chennai"),
         ("Saravanan M", "Direct Corporate BD Manager (Automotive ERP Division)", "sma@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Tamilselvan B", "Senior Sales Consultant (Supply Chain & Inventory)", "tba@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Tamilselvan B", "Senior Sales Consultant (Supply Chain & Inventory)", "tba@odoo.com", "+91 79 4050 0100", "Coimbatore"),
         ("Uma Maheshwari", "Direct Account Manager (Healthcare & Pharma ERP)", "uma@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Venkatesh Babu", "Regional Territory Executive (Vellore & North TN Zone)", "vba@odoo.com", "+91 63570 77743", "Vellore"),
+        ("Venkatesh Babu", "Regional Territory Executive (Vellore & North TN Zone)", "vba@odoo.com", "+91 79 4050 0100", "Vellore"),
         ("Yasmin Begum", "Direct Enterprise Sales Manager (Ecommerce ERP Suite)", "ybe@odoo.com", "+91 79 4050 0100", "Chennai"),
-        ("Zakir Hussain", "Lead Cloud Sales Specialist (SaaS ERP Solutions)", "zhu@odoo.com", "+91 63570 77743", "Coimbatore"),
+        ("Zakir Hussain", "Lead Cloud Sales Specialist (SaaS ERP Solutions)", "zhu@odoo.com", "+91 79 4050 0100", "Coimbatore"),
         ("Abhinav Swaminathan", "Senior Territory Sales Executive (South India HQ)", "asw@odoo.com", "+91 79 4050 0100", "Chennai")
     ]
 
