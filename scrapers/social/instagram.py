@@ -1,10 +1,17 @@
-"""
-Instagram Business Profile & Creator Lead Scraper.
-"""
-
+import re
 from typing import List, Dict, Any, Optional
+
+try:
+    from ddgs import DDGS
+except ImportError:
+    try:
+        from duckduckgo_search import DDGS
+    except ImportError:
+        DDGS = None
+
 from config.schemas import create_standard_lead
 from core.base_scraper import BaseScraper
+from lead_verifier import is_email_deliverable
 
 class InstagramScraper(BaseScraper):
     """Scrapes Instagram verified business profiles, bio links, and contact emails."""
@@ -19,27 +26,57 @@ class InstagramScraper(BaseScraper):
         max_results: int = 30
     ) -> List[Dict[str, Any]]:
         leads = []
-        self.logger.info("Extracting Instagram verified business profiles...")
+        target_locations = locations or ["Australia", "India"]
+        target_keywords = keywords or ["software development", "web design agency", "crm consultant"]
 
-        ig_leads = [
-            ("Aura Design Studios", "https://instagram.com/auradesign_au", "Sydney", "Australia", "hello@auradesign.com.au", "UI/UX & Web Design Studio"),
-            ("ByteCraft Agency", "https://instagram.com/bytecraft_melb", "Melbourne", "Australia", "team@bytecraft.com.au", "Mobile App & SaaS Builders"),
-            ("Quantum ERP Solutions", "https://instagram.com/quantumerp_india", "Bangalore", "India", "contact@quantumerp.in", "Odoo & Zoho Enterprise Suite")
-        ]
+        self.logger.info(f"Scraping live Instagram business profiles for {target_locations}...")
 
-        for name, profile_url, city, country, email, industry in ig_leads:
-            if len(leads) >= max_results:
-                break
-            leads.append(create_standard_lead(
-                company_name=name,
-                lead_source=self.lead_source,
-                source_url=profile_url,
-                social_url=profile_url,
-                email=email,
-                city=city,
-                country=country,
-                industry=industry,
-                description=f"Instagram business brand with verified bio contact in {city}."
-            ))
+        if not DDGS:
+            self.logger.warning("DDGS module not available. Skipping Instagram query.")
+            return leads
+
+        email_regex = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
+
+        try:
+            with DDGS() as ddgs:
+                for loc in target_locations:
+                    for kw in target_keywords:
+                        if len(leads) >= max_results:
+                            break
+                        query = f'site:instagram.com "{kw}" "{loc}" email OR contact'
+                        try:
+                            for res in ddgs.text(query, max_results=5):
+                                if len(leads) >= max_results:
+                                    break
+                                title = res.get("title", "")
+                                body = res.get("body", "")
+                                link = res.get("href", "")
+                                combined = f"{title} {body}"
+
+                                found_emails = email_regex.findall(combined)
+                                valid_email = None
+                                for em in found_emails:
+                                    ok, clean_em, _ = is_email_deliverable(em)
+                                    if ok:
+                                        valid_email = clean_em
+                                        break
+
+                                if valid_email:
+                                    comp_name = title.split("•")[0].split("(@")[0].replace("Instagram", "").strip()
+                                    leads.append(create_standard_lead(
+                                        company_name=comp_name or f"{kw.title()} Studio",
+                                        lead_source=self.lead_source,
+                                        source_url=link,
+                                        social_url=link,
+                                        email=valid_email,
+                                        city=loc,
+                                        country=loc,
+                                        industry="Design & Technology",
+                                        description=body[:200]
+                                    ))
+                        except Exception as e:
+                            self.logger.warning(f"Error querying DDG for Instagram: {e}")
+        except Exception as e:
+            self.logger.warning(f"Instagram search error: {e}")
 
         return leads

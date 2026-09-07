@@ -1,10 +1,17 @@
-"""
-Twitter / X Tech Founders & Business Lead Scraper.
-"""
-
+import re
 from typing import List, Dict, Any, Optional
+
+try:
+    from ddgs import DDGS
+except ImportError:
+    try:
+        from duckduckgo_search import DDGS
+    except ImportError:
+        DDGS = None
+
 from config.schemas import create_standard_lead
 from core.base_scraper import BaseScraper
+from lead_verifier import is_email_deliverable
 
 class TwitterScraper(BaseScraper):
     """Scrapes active Tech Founders, CTOs, and agencies from Twitter / X."""
@@ -19,27 +26,57 @@ class TwitterScraper(BaseScraper):
         max_results: int = 30
     ) -> List[Dict[str, Any]]:
         leads = []
-        self.logger.info("Extracting Twitter / X founder profiles and tech startup leads...")
+        target_locations = locations or ["Australia", "India"]
+        target_keywords = keywords or ["tech founder", "cto", "software agency", "odoo partner"]
 
-        twitter_leads = [
-            ("DevStack Australia", "https://x.com/devstack_au", "Sydney", "Australia", "hi@devstack.com.au", "Full Stack Development Community"),
-            ("CloudBuilders Global", "https://x.com/cloudbuilders_io", "Melbourne", "Australia", "founders@cloudbuilders.io", "AWS / GCP Serverless Architects"),
-            ("Z-Apps Technology", "https://x.com/zapps_tech", "Hyderabad", "India", "info@zapps.tech", "Zoho & Cloud Automation Experts")
-        ]
+        self.logger.info(f"Scraping live Twitter / X business leads for {target_locations}...")
 
-        for name, profile_url, city, country, email, industry in twitter_leads:
-            if len(leads) >= max_results:
-                break
-            leads.append(create_standard_lead(
-                company_name=name,
-                lead_source=self.lead_source,
-                source_url=profile_url,
-                social_url=profile_url,
-                email=email,
-                city=city,
-                country=country,
-                industry=industry,
-                description=f"Verified Twitter / X tech organization in {city}."
-            ))
+        if not DDGS:
+            self.logger.warning("DDGS module not available. Skipping Twitter query.")
+            return leads
+
+        email_regex = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
+
+        try:
+            with DDGS() as ddgs:
+                for loc in target_locations:
+                    for kw in target_keywords:
+                        if len(leads) >= max_results:
+                            break
+                        query = f'site:x.com "{kw}" "{loc}" email OR contact'
+                        try:
+                            for res in ddgs.text(query, max_results=5):
+                                if len(leads) >= max_results:
+                                    break
+                                title = res.get("title", "")
+                                body = res.get("body", "")
+                                link = res.get("href", "")
+                                combined = f"{title} {body}"
+
+                                found_emails = email_regex.findall(combined)
+                                valid_email = None
+                                for em in found_emails:
+                                    ok, clean_em, _ = is_email_deliverable(em)
+                                    if ok:
+                                        valid_email = clean_em
+                                        break
+
+                                if valid_email:
+                                    comp_name = title.split("(@")[0].split("on X:")[0].replace("X.com", "").strip()
+                                    leads.append(create_standard_lead(
+                                        company_name=comp_name or f"{kw.title()} Organization",
+                                        lead_source=self.lead_source,
+                                        source_url=link,
+                                        social_url=link,
+                                        email=valid_email,
+                                        city=loc,
+                                        country=loc,
+                                        industry="Tech & Cloud Infrastructure",
+                                        description=body[:200]
+                                    ))
+                        except Exception as e:
+                            self.logger.warning(f"Error querying DDG for Twitter: {e}")
+        except Exception as e:
+            self.logger.warning(f"Twitter search error: {e}")
 
         return leads

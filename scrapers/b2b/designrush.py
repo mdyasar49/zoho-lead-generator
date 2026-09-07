@@ -61,25 +61,4 @@ class DesignRushScraper(BaseScraper):
         except Exception as e:
             self.logger.warning(f"Error scraping DesignRush: {e}")
 
-        # Fallback profile enrichment
-        if not leads:
-            self.logger.info("DesignRush fallback structured agency generation.")
-            sample_agencies = [
-                ("Apex Digital Innovations", "Sydney", "Australia", "https://apexdigital.com.au", "hello@apexdigital.com.au"),
-                ("Nexus Cloud Architecture", "Melbourne", "Australia", "https://nexuscloud.com.au", "info@nexuscloud.com.au"),
-                ("BlueStone Technologies", "Brisbane", "Australia", "https://bluestonetech.com.au", "contact@bluestonetech.com.au")
-            ]
-            for name, city, country, site, email in sample_agencies:
-                leads.append(create_standard_lead(
-                    company_name=name,
-                    lead_source=self.lead_source,
-                    source_url=url,
-                    website_url=site,
-                    email=email,
-                    city=city,
-                    country=country,
-                    industry="Software & Digital Transformation",
-                    description=f"DesignRush certified top software agency in {city}."
-                ))
-
         return leads

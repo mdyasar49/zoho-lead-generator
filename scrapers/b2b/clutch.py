@@ -76,21 +76,4 @@ class ClutchScraper(BaseScraper):
             except Exception as e:
                 self.logger.warning(f"Error scraping Clutch for {loc}: {e}")
 
-        # Fallback to simulated live structured leads if direct scraping gets 403 / Cloudflare
-        if not leads:
-            self.logger.info("Direct Clutch HTML blocked by Cloudflare; extracting structured verified profiles.")
-            for i, loc in enumerate(target_locations):
-                leads.append(create_standard_lead(
-                    company_name=f"Top Tech Solutions {loc.title()}",
-                    lead_source=self.lead_source,
-                    source_url=f"https://clutch.co/developers/{loc.lower()}",
-                    contact_person=f"Managing Director {i+1}",
-                    email=f"contact@toptech{loc.lower().replace(' ', '')}.com",
-                    website_url=f"https://www.toptech{loc.lower().replace(' ', '')}.com",
-                    country=loc.title(),
-                    city=loc.title(),
-                    industry="Enterprise Software & Cloud",
-                    description=f"Clutch top rated 5-star custom development firm in {loc}."
-                ))
-
         return leads

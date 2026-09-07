@@ -59,13 +59,37 @@ class BaseScraper(ABC):
         pass
 
     def validate_and_enrich(self, leads: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Passes all leads through the central LeadVerifier."""
-        self.logger.info(f"Validating and enriching {len(leads)} leads...")
-        enriched = []
+        """
+        Passes all leads through the central LeadVerifier and strictly drops
+        any lead that does not have a 100% verified, deliverable email.
+        Zero tolerance for bouncing or invalid email addresses.
+        """
+        self.logger.info(f"Validating and filtering {len(leads)} leads for zero-bounce deliverability...")
+        valid_leads = []
         for lead in leads:
+            email = (
+                lead.get("Work Email") or
+                lead.get("Primary Work Email") or
+                lead.get("Email") or
+                lead.get("email") or
+                lead.get("verified_email") or
+                ""
+            ).strip().lower()
+
+            if not email or "@" not in email:
+                self.logger.warning(f"Dropping lead '{lead.get('Company Name') or 'Unknown'}' - No email found.")
+                continue
+
+            is_valid, reason = LeadVerifier.verify_email(email)
+            if not is_valid:
+                self.logger.warning(f"Dropping bouncing/undeliverable lead '{lead.get('Company Name') or 'Unknown'}' (Email: {email}) - Reason: {reason}")
+                continue
+
             validated = LeadVerifier.enrich_and_validate(lead)
-            enriched.append(validated)
-        return enriched
+            valid_leads.append(validated)
+
+        self.logger.info(f"Retained {len(valid_leads)}/{len(leads)} verified deliverable leads (Purged all undeliverable/bouncing leads).")
+        return valid_leads
 
     def export(self, leads: List[Dict[str, Any]], spreadsheet_id: Optional[str] = None) -> Dict[str, Any]:
         """Exports leads through the central exporter."""

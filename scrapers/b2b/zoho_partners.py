@@ -74,29 +74,4 @@ class ZohoPartnerScraper(BaseScraper):
             except Exception as e:
                 self.logger.warning(f"Error fetching Zoho partners: {e}")
 
-        # Fallback verified partners
-        if not leads:
-            self.logger.info("Using verified Zoho Partner baseline.")
-            sample_partners = [
-                ("A2Z Cloud Australia", "Premium Partner", "Sydney", "Australia", "https://a2zcloud.com.au", "hello@a2zcloud.com.au"),
-                ("Human Pixel Pty Ltd", "Advanced Partner", "Melbourne", "Australia", "https://humanpixel.com.au", "contact@humanpixel.com.au"),
-                ("Cloud Solutions Group", "Authorized Partner", "Brisbane", "Australia", "https://cloudsg.com.au", "info@cloudsg.com.au"),
-                ("Webinopoly Australia", "Premium Partner", "Perth", "Australia", "https://webinopoly.com", "support@webinopoly.com"),
-                ("YAALI Business Consulting", "Premium Partner", "Chennai", "India", "https://yaaliconsulting.com", "sales@yaaliconsulting.com")
-            ]
-            for name, tier, city, country, site, email in sample_partners:
-                leads.append(create_standard_lead(
-                    company_name=name,
-                    lead_source=self.lead_source,
-                    source_url="https://www.zoho.com/partners/",
-                    contact_person="Zoho Alliance Manager",
-                    email=email,
-                    website_url=site,
-                    city=city,
-                    country=country,
-                    industry="Zoho One & CRM Consultation",
-                    partner_grade=tier,
-                    description=f"Certified {tier} Zoho Partner specializing in Zoho One, CRM, and Creator custom workflows."
-                ))
-
         return leads

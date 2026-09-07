@@ -87,8 +87,15 @@ class Settings:
     ODOO_PASSWORD: str = os.getenv("ODOO_PASSWORD", "admin")
 
     # -------------------------------------------------------------
-    # 6. External APIs (Serper & Gemini AI)
+    # 6. External APIs (Google Custom Search, Serper & Gemini AI)
     # -------------------------------------------------------------
+    GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY", "")
+    GOOGLE_CX_ID: str = os.getenv("GOOGLE_CX_ID", os.getenv("CX_ID", "55060e430beb747a7"))
+    GOOGLE_AUSTRALIA_CX_ID: str = os.getenv("GOOGLE_AUSTRALIA_CX_ID", "c1b7afab14a4b4355")
+    GOOGLE_PROJECT_ID: str = os.getenv("GOOGLE_PROJECT_ID", "my-seo-data-fetcher")
+    GOOGLE_PROJECT_NUMBER: str = os.getenv("GOOGLE_PROJECT_NUMBER", "270336724333")
+    APPS_SCRIPT_ID: str = os.getenv("APPS_SCRIPT_ID", "1IMB_yO0zkCxZ9stQ2IcqOLrYvJmk0rf7pLOKc7GEzdIHyIS_gSpMi3EE")
+
     SERPER_API_KEY: str = os.getenv("SERPER_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")

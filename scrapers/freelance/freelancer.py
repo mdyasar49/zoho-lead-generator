@@ -59,19 +59,4 @@ class FreelancerScraper(BaseScraper):
         except Exception as e:
             self.logger.warning(f"Error scraping Freelancer.com: {e}")
 
-        if not leads:
-            self.logger.info("Providing verified Freelancer lead pipeline.")
-            leads.append(create_standard_lead(
-                company_name="NextGen AI SaaS Startup",
-                lead_source=self.lead_source,
-                source_url="https://www.freelancer.com/projects/software-architecture/ai-saas-platform",
-                contact_person="Founder & CEO",
-                job_title="Full Stack Engineer for AI SaaS Platform",
-                email="founders@nextgenai.tech",
-                city="Sydney",
-                country="Australia",
-                industry="AI & Machine Learning SaaS",
-                description="Hiring a team/developer to build an automated workflow engine with Gemini API & Python FastAPI."
-            ))
-
         return leads

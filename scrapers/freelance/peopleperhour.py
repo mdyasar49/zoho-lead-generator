@@ -59,19 +59,4 @@ class PeoplePerHourScraper(BaseScraper):
         except Exception as e:
             self.logger.warning(f"Error scraping PeoplePerHour: {e}")
 
-        if not leads:
-            self.logger.info("Providing verified PeoplePerHour lead pipeline.")
-            leads.append(create_standard_lead(
-                company_name="Vanguard Logistics Group",
-                lead_source=self.lead_source,
-                source_url="https://www.peopleperhour.com/freelance-jobs/logistics-crm-sync",
-                contact_person="CTO",
-                job_title="Custom ERP & CRM Middleware Developer",
-                email="tech@vanguardlogistics.com.au",
-                city="Brisbane",
-                country="Australia",
-                industry="Logistics & Supply Chain ERP",
-                description="Needs custom API middleware to connect legacy warehousing software with modern cloud CRM."
-            ))
-
         return leads

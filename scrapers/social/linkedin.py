@@ -75,29 +75,4 @@ class LinkedInScraper(BaseScraper):
                 except Exception as e:
                     self.logger.warning(f"Error querying LinkedIn jobs guest API: {e}")
 
-        # Fallback verified enterprise LinkedIn leads
-        if not leads:
-            self.logger.info("Providing verified LinkedIn enterprise lead dataset.")
-            verified_data = [
-                ("Atlassian", "Sydney", "Australia", "https://www.atlassian.com", "talent@atlassian.com", "Principal Enterprise Solutions Architect"),
-                ("Canva", "Sydney", "Australia", "https://www.canva.com", "careers@canva.com", "Lead Cloud Infrastructure Engineer"),
-                ("SafetyCulture", "Sydney", "Australia", "https://safetyculture.com", "hiring@safetyculture.com", "Staff Backend Developer (Python/Go)"),
-                ("Zoho Corporation", "Chennai", "India", "https://www.zoho.com", "partners@zohocorp.com", "Senior Technical Evangelist"),
-                ("Freshworks", "Chennai", "India", "https://www.freshworks.com", "contact@freshworks.com", "Director of Product Integrations")
-            ]
-            for company, city, country, site, email, role in verified_data:
-                leads.append(create_standard_lead(
-                    company_name=company,
-                    lead_source=self.lead_source,
-                    source_url=f"https://www.linkedin.com/company/{company.lower().replace(' ', '')}",
-                    contact_person="Talent & Engineering Leadership",
-                    job_title=role,
-                    email=email,
-                    website_url=site,
-                    city=city,
-                    country=country,
-                    industry="Enterprise Software & SaaS",
-                    description=f"Active LinkedIn hiring & business expansion in {city}."
-                ))
-
         return leads

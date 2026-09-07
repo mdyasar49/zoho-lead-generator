@@ -77,29 +77,4 @@ class OdooPartnerScraper(BaseScraper):
             except Exception as e:
                 self.logger.warning(f"Error fetching Odoo partners for {country}: {e}")
 
-        # Fallback verified partners if network/anti-bot restricts static scrape
-        if not leads:
-            self.logger.info("Using verified Odoo Certified Partner baseline.")
-            sample_partners = [
-                ("WilldooIT Pty Ltd", "Gold Partner", "Hobart / Melbourne", "Australia", "https://willdooit.com", "info@willdooit.com"),
-                ("Odoo Experts Australia", "Silver Partner", "Sydney", "Australia", "https://odooexperts.com.au", "contact@odooexperts.com.au"),
-                ("Target Integration Australia", "Ready Partner", "Brisbane", "Australia", "https://targetintegration.com", "sales@targetintegration.com"),
-                ("Ksolves India Limited", "Gold Partner", "Noida / Bangalore", "India", "https://ksolves.com", "sales@ksolves.com"),
-                ("BizzAppDev Solutions", "Gold Partner", "Ahmedabad", "India", "https://bizzappdev.com", "contact@bizzappdev.com")
-            ]
-            for name, grade, city, country, site, email in sample_partners:
-                leads.append(create_standard_lead(
-                    company_name=name,
-                    lead_source=self.lead_source,
-                    source_url="https://www.odoo.com/partners",
-                    contact_person="Odoo Practice Lead",
-                    email=email,
-                    website_url=site,
-                    city=city,
-                    country=country,
-                    industry="ERP & Odoo Implementation",
-                    partner_grade=grade,
-                    description=f"Certified {grade} Odoo Partner providing ERP consultation and migration."
-                ))
-
         return leads

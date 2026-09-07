@@ -66,32 +66,4 @@ class UpworkScraper(BaseScraper):
             except Exception as e:
                 self.logger.warning(f"Browser scrape encountered challenge: {e}")
 
-            # Fallback structured leads if captcha/cloudflare is active
-            if not leads:
-                self.logger.info("Extracting live verified Upwork client project pipeline.")
-                leads.append(create_standard_lead(
-                    company_name="Enterprise Cloud Migration Client",
-                    lead_source=self.lead_source,
-                    source_url="https://www.upwork.com/jobs/~01cloudmigrationau",
-                    contact_person="Hiring Director",
-                    job_title="Full Stack Software Architect (React / Python)",
-                    email="hiring@enterprisecloud.com.au",
-                    city="Sydney",
-                    country="Australia",
-                    industry="IT / Cloud Engineering",
-                    description="Looking for an experienced agency or developer to build custom backend integration & API pipelines."
-                ))
-                leads.append(create_standard_lead(
-                    company_name="Retail POS & Odoo Integration Client",
-                    lead_source=self.lead_source,
-                    source_url="https://www.upwork.com/jobs/~02odoomigrationau",
-                    contact_person="Operations Manager",
-                    job_title="Odoo 17 Implementation & Custom Module Developer",
-                    email="ops@melbourneretail.com.au",
-                    city="Melbourne",
-                    country="Australia",
-                    industry="ERP & Retail Implementation",
-                    description="Immediate requirement to migrate multi-store inventory to Odoo Enterprise."
-                ))
-
         return leads
