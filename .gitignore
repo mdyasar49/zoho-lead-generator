@@ -2,3 +2,9 @@
 *.json
 
 *.json
+.env
+*.log
+logs/
+__pycache__/
+*.pyc
+credentials.json
