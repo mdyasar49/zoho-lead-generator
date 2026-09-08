@@ -25,11 +25,18 @@ class OdooPartnerScraper(BaseScraper):
         leads = []
         target_locations = locations or ["Australia", "India"]
 
+        COUNTRY_SLUGS = {
+            "australia": "australia-11",
+            "india": "india-101",
+            "united states": "united-states-225",
+            "united kingdom": "united-kingdom-224"
+        }
+
         for country in target_locations:
             if len(leads) >= max_results:
                 break
 
-            country_slug = country.lower().replace(" ", "-")
+            country_slug = COUNTRY_SLUGS.get(country.lower(), country.lower().replace(" ", "-"))
             url = f"https://www.odoo.com/partners/country/{country_slug}"
             self.logger.info(f"Scraping Odoo Partners for {country}: {url}")
 
@@ -39,40 +46,69 @@ class OdooPartnerScraper(BaseScraper):
 
             try:
                 resp = requests.get(url, headers=headers, timeout=20)
+                if resp.status_code != 200:
+                    url = f"https://www.odoo.com/partners"
+                    resp = requests.get(url, headers=headers, timeout=20)
                 if resp.status_code == 200:
                     soup = BeautifulSoup(resp.text, "html.parser")
-                    partner_cards = soup.select(".o_partner_card, .o_partner_item, div[itemtype*='Organization']")
-
-                    for card in partner_cards:
+                    partner_links = [
+                        a.get("href") for a in soup.find_all("a")
+                        if a.get("href", "").startswith("/partners/") and not any(p in a.get("href", "") for p in ["/country/", "?industry=", "?grade="])
+                    ]
+                    
+                    seen_urls = set()
+                    for rel_url in partner_links:
                         if len(leads) >= max_results:
                             break
-
-                        name_elem = card.select_one("h3, .o_partner_name, a[itemprop='name']")
-                        name = name_elem.get_text(strip=True) if name_elem else ""
-                        if not name:
+                        if rel_url in seen_urls:
                             continue
-
-                        grade_elem = card.select_one(".badge, .o_partner_grade, .o_partner_tier")
-                        grade = grade_elem.get_text(strip=True) if grade_elem else "Certified Partner"
-
-                        site_elem = card.select_one("a[href*='http']:not([href*='odoo.com'])")
-                        website = site_elem.get("href", "") if site_elem else ""
-
-                        city_elem = card.select_one(".o_partner_city, span[itemprop='addressLocality']")
-                        city = city_elem.get_text(strip=True) if city_elem else ""
-
-                        lead = create_standard_lead(
-                            company_name=name,
-                            lead_source=self.lead_source,
-                            source_url=url,
-                            company_website_url=website,
-                            city=city,
-                            country=country,
-                            industry="ERP & Odoo Solutions",
-                            partner_grade=grade,
-                            description=f"Official {grade} Odoo ERP implementation partner in {country}."
-                        )
-                        leads.append(lead)
+                        seen_urls.add(rel_url)
+                        
+                        full_partner_url = f"https://www.odoo.com{rel_url}" if rel_url.startswith("/") else rel_url
+                        try:
+                            p_resp = requests.get(full_partner_url, headers=headers, timeout=10)
+                            if p_resp.status_code == 200:
+                                p_soup = BeautifulSoup(p_resp.text, "html.parser")
+                                raw_title = p_soup.title.get_text(strip=True) if p_soup.title else ""
+                                comp_name = raw_title.split("|")[0].split("-")[0].strip() or "Odoo Partner"
+                                
+                                website = ""
+                                phone = ""
+                                email = ""
+                                
+                                for a in p_soup.find_all("a"):
+                                    href = a.get("href", "")
+                                    if href.startswith("tel:"):
+                                        phone = href.replace("tel:", "").strip()
+                                    elif "mailto:" in href:
+                                        email = href.replace("mailto:", "").split("?")[0].strip()
+                                    elif href.startswith("http") and not any(ign in href for ign in ["odoo.com", "odoo.sh", "github.com", "youtube.com", "twitter.com", "linkedin.com", "instagram.com", "facebook.com", "tiktok.com", "wa.me"]):
+                                        if not website:
+                                            website = href
+                                
+                                # Extract domain email fallback if email is not explicit
+                                if not email and website:
+                                    domain = website.split("/")[2].replace("www.", "").lower()
+                                    email = f"contact@{domain}"
+                                
+                                grade = "Gold Partner" if "Gold" in p_soup.get_text() else ("Silver Partner" if "Silver" in p_soup.get_text() else "Certified Partner")
+                                
+                                lead = create_standard_lead(
+                                    company_name=comp_name,
+                                    lead_source=self.lead_source,
+                                    source_url=full_partner_url,
+                                    website_url=website or full_partner_url,
+                                    email=email,
+                                    phone=phone,
+                                    city=country,
+                                    country=country,
+                                    industry="ERP & Odoo Solutions",
+                                    partner_grade=grade,
+                                    description=f"Official {grade} Odoo ERP implementation partner in {country}. Website: {website}, Phone: {phone}."
+                                )
+                                leads.append(lead)
+                        except Exception as pe:
+                            self.logger.warning(f"Error fetching partner detail {full_partner_url}: {pe}")
 
             except Exception as e:
                 self.logger.warning(f"Error fetching Odoo partners for {country}: {e}")

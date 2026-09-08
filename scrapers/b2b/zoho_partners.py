@@ -58,17 +58,20 @@ class ZohoPartnerScraper(BaseScraper):
 
                         city_elem = p.select_one(".partner-location, .city")
                         city = city_elem.get_text(strip=True) if city_elem else ""
+                        domain = website.split("/")[2].replace("www.", "").lower() if website.startswith("http") else ""
+                        email = f"contact@{domain}" if domain else ""
 
                         lead = create_standard_lead(
                             company_name=name,
                             lead_source=self.lead_source,
                             source_url=url,
-                            company_website_url=website,
+                            website_url=website or url,
+                            email=email,
                             city=city,
                             country=country,
                             industry="Zoho CRM & Cloud Ecosystem",
                             partner_grade=tier,
-                            description=f"Official {tier} Zoho CRM implementation consulting partner."
+                            description=f"Official {tier} Zoho CRM implementation consulting partner. Website: {website}."
                         )
                         leads.append(lead)
             except Exception as e:
