@@ -2,20 +2,25 @@ name: Hourly Odoo & Zoho Sales Executive Lead Generator
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every 1 hour
+    # Runs 24/7 in GitHub cloud at the top of every hour
+    - cron: '0 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   run-lead-generator:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: 'pip'
 
       - name: Install Dependencies
         run: |
@@ -24,9 +29,15 @@ jobs:
 
       - name: Authenticate GCP Service Account
         run: |
-          echo "${{ secrets.GCP_SA_KEY }}" > sheet-sync-504707-85df40232946.json
+          if [ -n "${{ secrets.GCP_SA_KEY }}" ]; then
+            echo "${{ secrets.GCP_SA_KEY }}" > sheet-sync-504707-85df40232946.json
+          fi
 
-      - name: Execute Odoo & Zoho Lead Generators
+      - name: Execute Odoo & Zoho Lead Generators (Sheets + Zoho CRM)
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID || '1000.I8BXR1U9XEX0TGSSBBS969PUAQDDCO' }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET || 'f0b12ded0b82b34eca1aa52f3a4e688ac43603755b' }}
+          ZOHO_REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN || '1000.fb5b161d68abd14ef17be0b078337e7d.b7d8d9d85d96eaa03498881c09a5f294' }}
         run: |
           python run_all_lead_generators.py
 

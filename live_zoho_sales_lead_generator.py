@@ -15,8 +15,8 @@ import os
 import sys
 import json
 import time
+import csv
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 from datetime import datetime
 from pathlib import Path
@@ -389,10 +389,14 @@ def scrape_live_zoho_sales_leads():
         scraped_leads.append(lead)
 
     # Save local CSV and JSON
-    df = pd.DataFrame(scraped_leads)
     csv_path = OUTPUT_DIR / "zoho_sales_executive_leads_tn.csv"
     json_path = OUTPUT_DIR / "zoho_sales_executive_leads_tn.json"
-    df.to_csv(csv_path, index=False, encoding="utf-8")
+    
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=HEADERS, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(scraped_leads)
+        
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(scraped_leads, f, indent=2)
 
