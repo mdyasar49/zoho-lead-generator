@@ -1,0 +1,282 @@
+================================================================================
+  MASTER SCRAPING KEYWORDS & SEARCH PATTERNS (PLATFORM & SOURCE WISE BREAKDOWN)
+================================================================================
+
+--------------------------------------------------------------------------------
+1. 🤖 UPWORK PLATFORM SCRAPING KEYWORDS & DETAILS
+--------------------------------------------------------------------------------
+Module Reference : Data-Scraping/Upwork/upwork_new.py :: KEYWORDS
+Target Platform  : Upwork Job Portal (https://www.upwork.com/jobs)
+Scraping Purpose : Discovering contract web scraping, data extraction, and site migration jobs.
+
+Exact Keywords Matched in Code:
+- scrap
+- scrape
+- scraping
+- extractor
+- migration
+- migrate
+- redesign
+- upgrade
+- http
+- https
+- www
+- .com
+- domain
+- url
+- site link
+- web address
+- landing page
+
+Scraped Data Points & Schema:
+- Job Title & Full Requirement Description
+- Fixed Budget Amount ($) & Hourly Rate Range ($/hr Min/Max)
+- Total Client Spent ($ Spent on Platform)
+- Client Country / Location (Australia & Global Targets)
+- Proposal Count Tier & Payment Verification Status
+- Direct Job Post URL
+
+--------------------------------------------------------------------------------
+2. 💼 LINKEDIN PLATFORM SCRAPING KEYWORDS & DETAILS
+--------------------------------------------------------------------------------
+Module Reference : LinkedIn-Data-Scraping/linkedinScraper.py, Linkedin_scrape.py
+Target Platform  : LinkedIn Profiles, Company Pages & Posts (https://www.linkedin.com)
+Scraping Purpose : B2B Executive Prospecting & Contact Intelligence Extraction.
+
+Search Dorks Used:
+- site:linkedin.com/in/
+- site:linkedin.com/company/
+- site:linkedin.com/posts
+
+Target Decision-Maker Titles Scraped:
+- Managing Director
+- Director of IT
+- IT Manager
+- Chief Executive Officer (CEO)
+- Founder
+- Co-Founder
+- Operations Head
+- Operations Manager
+- Plant Manager
+- Hospital Administrator
+- Property Manager
+- Partner
+- Managing Partner
+- Principal
+
+Target Technical Roles Scraped:
+- Full Stack Developer
+- React Developer
+- Node.js
+- Python Developer
+- MERN Stack Developer
+- Senior Full-Stack AI Engineer
+- Microservices Developer
+
+Scraped Data Points & Schema:
+- Full Name (First Name & Last Name)
+- Current Job Designation / Title
+- Company Legal Name
+- Direct LinkedIn Profile URL
+- Location (City, State, Country)
+- Enriched Work Email (MX & DNS Validated)
+- Phone / Mobile Number
+- Company Headcount Tier
+
+--------------------------------------------------------------------------------
+3. 🔎 GOOGLE SEARCH & SERPER.DEV LIVE SEARCH KEYWORDS & DETAILS
+--------------------------------------------------------------------------------
+Module Reference : Social-Media-Data-Scraping/social_scraper_serper.py, google-apps-script/Code.gs
+Target Platform  : Google Serper.dev Live Search Engine API
+Scraping Purpose : Live search engine scraping for local business contacts in Australia & India.
+
+Query Pattern Formats:
+- "{Industry} {Location} {Role} phone contact"
+- "site:linkedin.com/in {Role} {Location} email contact"
+
+Target Locations Targeted:
+- Australia Cities: Sydney, Melbourne, Brisbane, Perth, Adelaide
+- India Cities    : Bengaluru, Chennai, Mumbai, Hyderabad, New Delhi, Pune
+
+Target Industry Sectors (12 Sectors):
+- IT / Software & Cloud
+- ITES / BPO
+- ICT (Information & Communications Technology)
+- Healthcare & Medical
+- Manufacturing & Industrial
+- Education & Academics
+- Real Estate & Property Management
+- Retail & E-commerce
+- Consulting & Advisory
+- Wholesale & Distribution
+- Professional Services
+- Accounting & Financial Firms
+
+Scraped Data Points & Schema:
+- Company Name
+- Contact Person Name & Role
+- Direct Website URL
+- Validated Business Email
+- Formatted Phone Number (+61 / +91)
+- Industry Classification
+
+--------------------------------------------------------------------------------
+4. 📲 SOCIAL MEDIA PLATFORMS (FACEBOOK, INSTAGRAM, X/TWITTER, YOUTUBE, PINTEREST)
+--------------------------------------------------------------------------------
+Module Reference : Social-Media-Data-Scraping/job_vacancy_scraper.py, Facebook/extract.py
+Target Platforms : Instagram, Facebook, X (Twitter), YouTube, Pinterest
+Scraping Purpose : Detecting new business launches, pre-launch announcements, and active promotional posts.
+
+Pre-Launch & Startup Trigger Keywords:
+- coming soon
+- launching soon
+- opening soon
+- new launch
+- pre-launch
+- website launching
+- getting ready to launch
+- grand opening
+- pre-register now
+- beta launch
+- early access
+- launching this month
+- we are launching
+
+Social Search Dorks:
+- site:facebook.com "launching soon"
+- site:instagram.com "coming soon"
+- site:twitter.com "pre-launch" / site:x.com
+- site:youtube.com "new website launch"
+- site:pinterest.com
+
+AI Processing & Data Extracted:
+- Gemini 3.1 Flash / 3.6 Flash caption intelligence & intent summary
+- Post Publication Date & Direct Post URL
+- Brand / Page Name & Contact Profile Link
+- Extracted Email & Phone Number
+
+--------------------------------------------------------------------------------
+5. ⚡ ODOO ERP TECHNOGRAPHIC HUNTER KEYWORDS & DETAILS
+--------------------------------------------------------------------------------
+Module Reference : scripts/enrich_and_update_odoo_master.py, odoo_uploader/odoo_sync_engine.py
+Target Framework : Odoo ERP (OpenERP) Ecosystem Web Crawling & Partner Network
+Scraping Purpose : Finding businesses running Odoo ERP for module extensions, migration, & consulting.
+
+Source Code HTML/JS Signature Keywords:
+- /web/static/
+- /web/login
+- odoo.define
+- web.assets_backend
+- website_sale
+- Odoo Session ID
+
+Search Engine Dorks:
+- "Powered by Odoo"
+- site:.com.au "Odoo ready partner"
+- site:.co.in "Odoo implementation"
+- "Odoo ERP" + "Australia"
+- "Odoo Gold Partner"
+- "Odoo Silver Partner"
+- inurl:/shop "Odoo"
+
+Scraped Data Points & Schema:
+- Company Name & Domain
+- Odoo Implementation Scale & Version Footprint
+- Executive Contact Name & Title (e.g. Director of Operations)
+- Verified Work Email & Phone Number
+- Email Verification Status ("Verified (MX Validated)")
+- Odoo Sourcing Method & Signal Type
+
+--------------------------------------------------------------------------------
+6. 🦘 ZOHO ECOSYSTEM HUNTER KEYWORDS & DETAILS
+--------------------------------------------------------------------------------
+Module Reference : ZOHO_CRM_DELUGE_SCHEDULED_FUNCTION_CLEAN.deluge, upload_all_sheets_direct_to_zoho.py
+Target Ecosystem : Zoho CRM, Zoho Books, Zoho One, Zoho Creator, Deluge
+Scraping Purpose : Identifying companies using Zoho products in Australia & India needing custom integration.
+
+Product & Ecosystem Keywords:
+- Zoho CRM
+- Zoho One
+- Zoho Books
+- Zoho Creator
+- Zoho Desk
+- Deluge Scripting
+- Zoho Flow
+
+Search Engine Dorks:
+- "Zoho Advanced Partner" Sydney
+- "Zoho Authorized Partner" Melbourne
+- "Zoho CRM migration"
+- "Zoho integration partner" India
+- site:zoho.com/partners "Australia"
+- site:zoho.com/partners "India"
+
+Scraped Data Points & Schema:
+- Lead Source (Zoho Directory / Google Search)
+- Company Legal Name & Contact Person
+- Work Email & Phone / Mobile
+- Industry Vertical & Lead Rating Tier
+- Zoho CRM API v2 Sync Status
+
+--------------------------------------------------------------------------------
+7. 🌐 FREELANCER.COM & DIRECTORY PLATFORMS (CLUTCH & DESIGNRUSH)
+--------------------------------------------------------------------------------
+Module Reference : Data-Scraping/Freelancer/freelancer.py, clutch/extract.py, designrush/extract.py
+Target Platforms : Freelancer.com, Clutch.co, DesignRush
+
+Directory Search Dorks:
+- site:freelancer.com/projects
+- site:clutch.co/au/developers
+- site:designrush.com
+
+Freelancer Target Skills & Tags:
+- Python
+- Web Scraping
+- Data Mining
+- React.js
+- Node.js
+- PHP
+- Software Architecture
+
+Scraped Data Points & Schema:
+- Company / Freelancer Name
+- Rating & Client Reviews Count
+- Minimum Project Size ($) & Hourly Billed Rate ($/hr)
+- Direct Profile / Project URL
+
+--------------------------------------------------------------------------------
+8. 🚫 EXCLUDED FILTERS, SPAM & FAKE DATA GUARDS
+--------------------------------------------------------------------------------
+Purpose: Automatic rejection of invalid domains, no-reply aliases, and dummy numbers.
+
+Blacklisted / Invalid Domains:
+- example.com
+- sample.com
+- domain.com
+- email.com
+- test.com
+- sentry.io
+- wixpress.com
+- wordpress.com
+- myshopify.com
+- facebook.com
+- instagram.com
+- linkedin.com
+- twitter.com
+- youtube.com
+- reddit.com
+- bing.com
+- google.com
+- yahoo.com
+
+Blacklisted No-Reply Email Aliases:
+- noreply@
+- no-reply@
+- donotreply@
+
+Skipped Asset Extensions:
+- .css, .gif, .ico, .jpeg, .jpg, .js, .mp4, .pdf, .png, .svg, .webp, .zip
+
+Filtered Dummy Phone Numbers:
+- 0000000, 1111111, 9999999, 12345678, 555-xxxx
+================================================================================
