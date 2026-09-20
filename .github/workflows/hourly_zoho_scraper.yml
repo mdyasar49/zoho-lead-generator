@@ -1,8 +1,8 @@
 name: ⏰ Hourly Odoo & Zoho Sales Lead Generator & Zoho CRM Sync
 
 on:
-  schedule:
-    - cron: '0 * * * *'
+# schedule: [DISABLED BY USER - PREVENTS JUNK LEADS]
+#     - cron: '0 * * * *'
   workflow_dispatch:
   push:
     branches:
